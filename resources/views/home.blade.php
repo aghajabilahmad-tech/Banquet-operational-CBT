@@ -6,10 +6,12 @@
     <main class="hero-section">
         <h1 class="hero-title">Wujudkan <strong>Event Perhotelan</strong> yang Berkesan</h1>
 
-        <div class="btn-group">
-            <a href="#" class="btn btn-primary">Mulai Sekarang</a>
-            <a href="#" class="btn btn-outline">Lihat Jadwal</a>
-        </div>
+        @guest
+            <div class="btn-group">
+                <a href="{{ route('login') }}" class="btn btn-primary">Masuk ke Sistem</a>
+                <a href="{{ route('register') }}" class="btn btn-outline">Registrasi Baru</a>
+            </div>
+        @endguest
     </main>
 
     <div class="showcase-wrapper" id="showcaseWrapper">

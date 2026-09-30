@@ -1,0 +1,703 @@
+/* ==========================================================================
+   BEO System - Event List & Management Styles
+   ========================================================================== */
+
+.main-container {
+    flex: 1;
+    display: flex;
+    padding: 0 60px 0 60px;
+    align-items: stretch;
+    gap: 40px;
+    z-index: 2;
+    min-height: 0;
+}
+
+/* --------------------------------------------------------------------------
+   Panel Kiri (Hero Card / Featured Event)
+   -------------------------------------------------------------------------- */
+.left-panel {
+    flex: 0.7;
+    max-width: 420px;
+    min-width: 340px;
+    background: linear-gradient(135deg, #1E40AF 0%, #0F172A 100%);
+    border-radius: 0;
+    border: 1px solid rgba(15, 23, 42, 0.1);
+    border-bottom: none;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: #FFFFFF;
+    box-shadow: 15px 0 30px rgba(15, 23, 42, 0.08);
+    position: relative;
+    overflow: hidden;
+}
+
+.left-panel-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.25;
+    mix-blend-mode: overlay;
+    z-index: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+}
+
+.left-panel-content {
+    position: relative;
+    z-index: 1;
+    margin: auto 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.status-dot-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #60A5FA;
+    transition: color 0.4s ease;
+}
+
+.status-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #60A5FA;
+    box-shadow: 0 0 10px rgba(96, 165, 250, 0.5);
+    transition: all 0.4s ease;
+}
+
+.left-panel h1 {
+    font-size: 3.2rem;
+    font-weight: 300;
+    line-height: 1.15;
+    margin-bottom: 20px;
+    color: #FFFFFF;
+    word-break: break-word;
+}
+
+.left-panel h1 strong {
+    font-weight: 800;
+}
+
+.event-meta {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: 35px;
+    line-height: 1.9;
+    font-weight: 400;
+}
+
+.btn-action {
+    background-color: #FFFFFF;
+    color: #1E40AF;
+    border: none;
+    padding: 16px 36px;
+    font-size: 1rem;
+    font-weight: 700;
+    border-radius: 50px;
+    cursor: pointer;
+    width: max-content;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    margin-top: auto;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+}
+
+.btn-action:hover {
+    background-color: #F8FAFC;
+    transform: translateY(-2px);
+    box-shadow: 0 14px 32px rgba(0, 0, 0, 0.2);
+    color: #1E3A8A;
+}
+
+/* --------------------------------------------------------------------------
+   Panel Kanan (Search, Filter, Kalender, Slider, Stats)
+   -------------------------------------------------------------------------- */
+.right-panel {
+    flex: 1.5;
+    display: flex;
+    flex-direction: column;
+    padding: 25px 0 20px 0;
+    width: 100%;
+    overflow: hidden;
+    min-height: 0;
+}
+
+.top-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 15px;
+    width: 100%;
+    gap: 20px;
+}
+
+.search-filter-col {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    flex: 1;
+}
+
+.search-box-wrapper {
+    position: relative;
+    max-width: 340px;
+    width: 100%;
+}
+
+.search-box {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1.5px solid rgba(15, 23, 42, 0.2);
+    padding: 10px 30px 10px 0;
+    color: #0F172A;
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.search-box:focus {
+    border-bottom-color: #1E40AF;
+}
+
+.search-clear-btn {
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #94A3B8;
+    cursor: pointer;
+    font-size: 1rem;
+    display: none;
+}
+
+.search-clear-btn.visible {
+    display: block;
+}
+
+.filter-group {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    background: transparent;
+    color: #64748B;
+    border: 1px solid #CBD5E1;
+    padding: 7px 16px;
+    border-radius: 20px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    user-select: none;
+}
+
+.filter-btn:hover {
+    color: #0F172A;
+    border-color: #94A3B8;
+    background: #F8FAFC;
+}
+
+.filter-btn.active {
+    background: #1E40AF;
+    color: #FFFFFF;
+    border-color: #1E40AF;
+    box-shadow: 0 4px 12px rgba(30, 64, 175, 0.25);
+}
+
+/* --------------------------------------------------------------------------
+   Kalender Widget Interaktif
+   -------------------------------------------------------------------------- */
+.calendar-widget {
+    background: #FFFFFF;
+    border: 1px solid rgba(15, 23, 42, 0.06);
+    border-radius: 16px;
+    padding: 14px 18px;
+    width: 280px;
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05);
+    user-select: none;
+}
+
+.cal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.88rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #0F172A;
+}
+
+.cal-nav-btn {
+    cursor: pointer;
+    color: #64748B;
+    font-weight: bold;
+    font-size: 1.1rem;
+    padding: 2px 8px;
+    border-radius: 6px;
+    transition: all 0.2s;
+}
+
+.cal-nav-btn:hover {
+    color: #1E40AF;
+    background-color: #EFF6FF;
+}
+
+.cal-month-title {
+    cursor: default;
+    letter-spacing: -0.2px;
+}
+
+.cal-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+    text-align: center;
+    font-size: 0.72rem;
+}
+
+.cal-grid .day {
+    color: #64748B;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.cal-grid .date {
+    padding: 5px 0;
+    border-radius: 8px;
+    cursor: pointer;
+    color: #334155;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 26px;
+}
+
+.cal-grid .date:hover {
+    background: #F1F5F9;
+    color: #0F172A;
+}
+
+.cal-grid .date.active {
+    background: #1E40AF !important;
+    color: #FFFFFF !important;
+    font-weight: 700;
+    box-shadow: 0 4px 12px rgba(30, 64, 175, 0.35);
+}
+
+.cal-grid .date.dim {
+    color: #CBD5E1;
+}
+
+.cal-grid .date.has-event::after {
+    content: '';
+    display: block;
+    width: 4px;
+    height: 4px;
+    background: #3B82F6;
+    border-radius: 50%;
+    margin-top: 1px;
+}
+
+.cal-grid .date.active.has-event::after {
+    background: #FFFFFF;
+}
+
+/* --------------------------------------------------------------------------
+   Slider Kartu Event
+   -------------------------------------------------------------------------- */
+.slider-wrapper {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+.card-slider {
+    display: flex;
+    gap: 26px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding: 15px 0 35px 10px;
+    width: 100%;
+}
+
+.card-slider::-webkit-scrollbar {
+    display: none;
+}
+
+.event-card {
+    min-width: 310px;
+    max-width: 320px;
+    height: 390px;
+    border-radius: 20px;
+    background: #FFFFFF;
+    border: 1px solid rgba(15, 23, 42, 0.06);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 32px 28px;
+    transition: all 0.45s cubic-bezier(0.25, 0.8, 0.25, 1);
+    opacity: 0.55;
+    transform: scale(0.92);
+    cursor: pointer;
+    color: #0F172A;
+    user-select: none;
+    box-shadow: 0 4px 20px rgba(15, 23, 42, 0.04);
+}
+
+.event-card:hover {
+    opacity: 0.85;
+    transform: scale(0.96);
+}
+
+.event-card.active {
+    opacity: 1;
+    transform: scale(1.02);
+    box-shadow: 0 25px 50px rgba(15, 23, 42, 0.1);
+    border: 1.5px solid rgba(30, 64, 175, 0.2);
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.card-badge {
+    padding: 5px 13px;
+    border-radius: 50px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+}
+
+.card-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10px 0;
+}
+
+.card-body h3 {
+    font-size: 1.45rem;
+    font-weight: 800;
+    margin-bottom: 5px;
+    line-height: 1.25;
+    letter-spacing: -0.4px;
+    color: #0F172A;
+}
+
+.card-body .subtitle {
+    font-size: 0.9rem;
+    color: #1E40AF;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.card-body .desc {
+    font-size: 0.82rem;
+    color: #475569;
+    line-height: 1.6;
+    font-weight: 500;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.card-footer {
+    border-top: 1px solid #F1F5F9;
+    padding-top: 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer-item {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.footer-label {
+    font-size: 0.68rem;
+    color: #64748B;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+}
+
+.footer-value {
+    font-size: 0.88rem;
+    font-weight: 800;
+    color: #0F172A;
+}
+
+/* Pesan Kosong (No Events) */
+.no-events-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 40px;
+    text-align: center;
+    background: #FFFFFF;
+    border-radius: 18px;
+    border: 1px dashed #CBD5E1;
+    margin: 20px 0;
+    width: 100%;
+    color: #64748B;
+}
+
+.no-events-icon {
+    font-size: 2.2rem;
+    margin-bottom: 12px;
+    color: #94A3B8;
+}
+
+.no-events-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #334155;
+    margin-bottom: 6px;
+}
+
+.no-events-desc {
+    font-size: 0.85rem;
+    color: #64748B;
+}
+
+/* --------------------------------------------------------------------------
+   Baris Bawah (Statistik & Footer)
+   -------------------------------------------------------------------------- */
+.bottom-row {
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-top: 1px solid rgba(15, 23, 42, 0.06);
+    padding-top: 15px;
+    width: 100%;
+}
+
+.stats-container {
+    display: flex;
+    gap: 16px;
+}
+
+.stat-box {
+    background: #FFFFFF;
+    border: 1px solid rgba(15, 23, 42, 0.05);
+    border-radius: 12px;
+    padding: 10px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    min-width: 140px;
+    transition: 0.3s;
+    box-shadow: 0 4px 15px rgba(15, 23, 42, 0.03);
+}
+
+.stat-label {
+    font-size: 0.68rem;
+    color: #64748B;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+}
+
+.stat-value {
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: #0F172A;
+    line-height: 1.2;
+}
+
+.stat-trend {
+    font-size: 0.68rem;
+    color: #10B981;
+    font-weight: 700;
+}
+
+.right-footer-links {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+    font-size: 0.82rem;
+    color: #64748B;
+    font-weight: 500;
+}
+
+.footer-nav {
+    display: flex;
+    gap: 15px;
+}
+
+.footer-nav a {
+    color: #64748B;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.footer-nav a:hover {
+    color: #1E40AF;
+}
+
+/* --------------------------------------------------------------------------
+   Responsivitas Layar
+   -------------------------------------------------------------------------- */
+@media (max-width: 1100px) {
+    .main-container {
+        padding: 0 30px;
+        gap: 25px;
+    }
+
+    .left-panel {
+        max-width: 320px;
+        padding: 35px;
+    }
+
+    .left-panel h1 {
+        font-size: 2.5rem;
+    }
+
+    .calendar-widget {
+        width: 240px;
+        padding: 10px 14px;
+    }
+}
+
+@media (max-width: 900px) {
+    body {
+        overflow-y: auto;
+        height: auto;
+    }
+
+    .main-container {
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    .left-panel {
+        max-width: 100%;
+        min-height: 380px;
+        border-radius: 20px;
+    }
+
+    .top-section {
+        flex-direction: column;
+    }
+
+    .calendar-widget {
+        width: 100%;
+        max-width: 350px;
+    }
+}
+
+@media (max-height: 860px) {
+    body {
+        overflow-y: auto !important;
+        height: auto !important;
+        min-height: 100vh;
+    }
+    .main-container {
+        min-height: calc(100vh - 100px);
+    }
+}
+
+/* --------------------------------------------------------------------------
+   Flash Message Toast / Banner
+   -------------------------------------------------------------------------- */
+.alert-toast-container {
+    position: fixed;
+    top: 85px;
+    right: 40px;
+    z-index: 9999;
+    animation: slideDownToast 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes slideDownToast {
+    from {
+        opacity: 0;
+        transform: translateY(-20px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.alert-toast {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: #ffffff;
+    border-left: 5px solid #10B981;
+    border-radius: 12px;
+    padding: 14px 20px;
+    box-shadow: 0 12px 35px rgba(15, 23, 42, 0.14), 0 4px 12px rgba(16, 185, 129, 0.1);
+    color: #1e293b;
+    font-size: 0.95rem;
+    font-weight: 500;
+    max-width: 480px;
+}
+
+.alert-toast-icon {
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    background: #ECFDF5;
+    color: #059669;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.alert-toast-body {
+    flex: 1;
+    line-height: 1.4;
+}
+
+.alert-toast-close {
+    background: transparent;
+    border: none;
+    font-size: 1.3rem;
+    color: #94a3b8;
+    cursor: pointer;
+    line-height: 1;
+    padding: 0 4px;
+    transition: color 0.2s;
+}
+
+.alert-toast-close:hover {
+    color: #334155;
+}
